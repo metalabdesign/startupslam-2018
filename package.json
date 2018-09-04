@@ -1,0 +1,39 @@
+{
+  "name": "startupslam-2018",
+  "scripts": {
+    "dev:api": "PORT=${PORT:-4041} npx nodemon -r @babel/register ./src/server/server.js",
+    "dev:web": "npx webpack-serve -r @babel/register --config ./webpack.config.js --port ${PORT:-8080} --content ./src/client/static"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.0.0",
+    "@babel/core": "^7.0.0",
+    "@babel/plugin-proposal-class-properties": "^7.0.0",
+    "@babel/plugin-transform-runtime": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/preset-flow": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/register": "^7.0.0",
+    "babel-loader": "^8.0.2",
+    "babel-plugin-graphql-tag": "^1.6.0",
+    "eslint": "^5.5.0",
+    "eslint-config-metalab": "^10.0.0",
+    "nodemon": "^1.18.4",
+    "prettier": "^1.14.2",
+    "webpack": "^4.17.2",
+    "webpack-partial": "^2.2.0",
+    "webpack-serve": "^2.0.2"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.0.0",
+    "apollo-cache-inmemory": "^1.2.9",
+    "apollo-client": "^2.4.1",
+    "apollo-link": "^1.2.2",
+    "apollo-link-http": "^1.5.4",
+    "apollo-server": "^2.0.6",
+    "graphql": "^14.0.0",
+    "graphql-tag": "^2.9.2",
+    "react": "^16.4.2",
+    "react-apollo": "^2.1.11",
+    "react-dom": "^16.4.2"
+  }
+}

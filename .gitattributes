@@ -1,0 +1,7 @@
+# Enforce LF line endings:
+# https://help.github.com/articles/dealing-with-line-endings/
+* text eol=lf
+
+# Enforce JS files to be rendered as JSX:
+# https://github.com/github/linguist#using-gitattributes
+*.js linguist-language=JSX
