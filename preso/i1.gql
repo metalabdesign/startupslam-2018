@@ -1,0 +1,11 @@
+type Book {
+  title: String!
+  rating: Float
+  reviewCount: Int!
+  author: Author!
+}
+
+type Author {
+  name: String!
+  # ...
+}

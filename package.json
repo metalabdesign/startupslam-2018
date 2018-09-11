@@ -28,12 +28,22 @@
     "apollo-cache-inmemory": "^1.2.9",
     "apollo-client": "^2.4.1",
     "apollo-link": "^1.2.2",
+    "apollo-link-context": "^1.0.8",
     "apollo-link-http": "^1.5.4",
     "apollo-server": "^2.0.6",
+    "auth-header": "^1.0.0",
     "graphql": "^14.0.0",
     "graphql-tag": "^2.9.2",
+    "jsonwebtoken": "^8.3.0",
+    "node-fetch": "^2.2.0",
     "react": "^16.4.2",
     "react-apollo": "^2.1.11",
-    "react-dom": "^16.4.2"
+    "react-dom": "^16.4.2",
+    "react-intl": "^2.4.0",
+    "react-motion": "^0.5.2",
+    "react-resize-observer": "^1.0.3",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1",
+    "styled-components": "^4.0.0-beta.2-0"
   }
 }
