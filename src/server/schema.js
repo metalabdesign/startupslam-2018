@@ -1,22 +1,101 @@
-import * as AppInfo from './service/AppInfo';
-import * as Movie from './service/Movie';
-import * as User from './service/User';
-import * as Actor from './service/Actor';
-import * as Review from './service/Review';
+//
+// See docs and examples at https://github.com/apollographql/awesome-launchpad
 
-export const typeDefs = [
-  AppInfo.typeDefs,
-  Movie.typeDefs,
-  User.typeDefs,
-  Actor.typeDefs,
-  Review.typeDefs,
-  /* Add other `typeDefs` entries here. */
-];
-export const resolvers = [
-  AppInfo.resolvers,
-  Movie.resolvers,
-  User.resolvers,
-  Actor.resolvers,
-  Review.resolvers,
-  /* Add other `resolvers` entries here. */
-];
+import {makeExecutableSchema} from 'graphql-tools';
+import movies from '../data/movies';
+
+// Construct a schema, using GraphQL schema language
+const typeDefs = `
+	# ================================================
+  # BEGIN WORKSHOP
+  # ================================================
+
+  """
+  Movie type.
+  """
+  type Movie {
+    id: ID!
+    title: String!
+    image: String!
+    actors: [Actor]!
+    genre: [String]!
+    reviews: [Review]!
+    rating: Float
+    reviewCount: Int!
+  }
+
+  """
+  User type.
+  """
+  type User {
+    id: ID!
+    name: String!
+    photo: String!
+  }
+
+  """
+  Actor type.
+  """
+  type Actor {
+    id: ID!
+    name: String!
+  }
+
+  """
+  Review type.
+  """
+  type Review {
+    id: ID!
+    user: User!
+    rating: Int!
+    content: String!
+  }
+
+  # ================================================
+  # END WORKSHOP
+  # ================================================
+
+  type Query {
+    appVersion: String
+    movies: [Movie]
+  }
+`;
+
+// Provide resolver functions for your schema fields
+const resolvers = {
+  Query: {
+    appVersion: () => {
+      return 'metaflix-0.1.0';
+    },
+    movies: () => movies,
+  },
+};
+
+// Required: Export the GraphQL.js schema object as "schema"
+export const schema = makeExecutableSchema({
+  typeDefs,
+  resolvers,
+});
+
+// Optional: Export a function to get context from the request. It accepts two
+// parameters - headers (lowercased http headers) and secrets (secrets defined
+// in secrets section). It must return an object (or a promise resolving to it).
+export function context(headers, secrets) {
+  return {
+    headers,
+    secrets,
+  };
+}
+
+// Optional: Export a root value to be passed during execution
+// export const rootValue = {};
+
+// Optional: Export a root function, that returns root to be passed
+// during execution, accepting headers and secrets. It can return a
+// promise. rootFunction takes precedence over rootValue.
+// export function rootFunction(headers, secrets) {
+//   return {
+//     headers,
+//     secrets,
+//   };
+// };

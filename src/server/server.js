@@ -1,7 +1,8 @@
 import {ApolloServer} from 'apollo-server';
 import {parse as parseAuthHeader} from 'auth-header';
 import jwt from 'jsonwebtoken';
-import {typeDefs, resolvers} from './schema';
+import {schema} from './schema';
+// import {typeDefs, resolvers} from './schema';
 
 const getUser = async (req, context) => {
   try {
@@ -27,8 +28,9 @@ const context = async ({req}) => {
 };
 
 const server = new ApolloServer({
-  typeDefs,
-  resolvers,
+  // typeDefs,
+  // resolvers,
+  schema,
   context,
   cors: {
     origin: /.*/,
@@ -38,5 +40,6 @@ const server = new ApolloServer({
 });
 
 server.listen(process.env.PORT || 4000).then(({url}) => {
+  console.log(schema)
   console.log(`🚀  Server ready at ${url}`);
 });
