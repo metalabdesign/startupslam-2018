@@ -2,37 +2,37 @@ import * as React from 'react';
 
 import Text from '../base/Text';
 import StarRating from '../base/StarRating';
-import Book from '../base/Book';
+import Movie from '../base/Movie';
 import Container from '../base/Container';
 import SpacedContent from '../base/SpacedContent';
 import Icon from '../base/Icon';
 import Separator from '../base/Separator';
 
-class BookDetailsScreen extends React.PureComponent {
+class MovieDetailsScreen extends React.PureComponent {
   static defaultProps = {
-    book: {
+    movie: {
       title: 'XXX',
-      author: {
+      director: {
         name: 'YYY',
       },
       rating: 4.6,
       reviewCount: 1202,
-      similarBooks: [],
+      similarMovies: [],
     },
   };
   render() {
-    const {book} = this.props;
+    const {movie} = this.props;
     return (
       // ...
       <div>
         <Container>
           <SpacedContent>
-            <Text.H1>{book.title}</Text.H1>
+            <Text.H1>{movie.title}</Text.H1>
             <Icon name="bookmark" />
-            <div>{book.author.name}</div>
+            <div>{movie.director.name}</div>
           </SpacedContent>
-          <StarRating value={book.rating} />
-          {book.reviewCount}
+          <StarRating value={movie.rating} />
+          {movie.reviewCount}
         </Container>
         <Container>
           <Separator />
@@ -40,8 +40,8 @@ class BookDetailsScreen extends React.PureComponent {
           <Separator />
         </Container>
         <Container>
-          {book.similarBooks.map((book) => {
-            return <Book book={book} key={book.id} />;
+          {movie.similarMovies.map((movie) => {
+            return <Movie movie={movie} key={movie.id} />;
           })}
         </Container>
       </div>
@@ -49,4 +49,4 @@ class BookDetailsScreen extends React.PureComponent {
   }
 }
 
-export default BookDetailsScreen;
+export default MovieDetailsScreen;

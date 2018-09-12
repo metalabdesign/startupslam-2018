@@ -6,7 +6,7 @@ import {createGlobalStyle, ThemeProvider} from 'styled-components';
 
 import CSSReset from './CSSReset';
 import HomeScreen from './view/HomeScreen';
-import BookDetailsScreen from './view/BookDetailsScreen';
+import MovieDetailsScreen from './view/MovieDetailsScreen';
 import NotFoundScreen from './view/NotFoundScreen';
 
 import * as theme from '../theme';
@@ -33,9 +33,9 @@ class AppRoot extends React.Component {
               <Switch>
                 <Route path="/" exact render={() => <HomeScreen />} />
                 <Route
-                  path="/book/:id"
+                  path="/movie/:id"
                   render={(routeProps) => {
-                    return <BookDetailsScreen id={routeProps.match.id} />;
+                    return <MovieDetailsScreen id={routeProps.match.id} />;
                   }}
                 />
                 <Route render={() => <NotFoundScreen />} />

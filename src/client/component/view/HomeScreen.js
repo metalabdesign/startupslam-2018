@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import Container from '../base/Container';
 import Text from '../base/Text';
-import Book from '../base/Book';
+import Movie from '../base/Movie';
 import Carousel from '../base/Carousel';
 
 class HomeScreen extends React.PureComponent {
@@ -13,9 +13,9 @@ class HomeScreen extends React.PureComponent {
         <Container>
           <Text.H2>Popular</Text.H2>
           <Carousel>
-            <Book />
-            <Book />
-            <Book />
+            <Movie />
+            <Movie />
+            <Movie />
           </Carousel>
         </Container>
         <Container>

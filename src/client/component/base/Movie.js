@@ -2,45 +2,45 @@ import * as React from 'react';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
 
-const BookImage = styled.img`
+const MovieImage = styled.img`
   max-width: 100%;
   border-radius: 4px;
 `;
 
-const BookWrapper = styled.div`
+const MovieWrapper = styled.div`
   width: 128px;
   display: block;
 `;
 
-const BookTitle = styled.div`
+const MovieTitle = styled.div`
   text-overflow: ellipses;
   overflow: hidden;
 `;
 
-const BookAuthor = styled.div``;
+const MovieDirector = styled.div``;
 
-class Book extends React.PureComponent {
+class Movie extends React.PureComponent {
   static defaultProps = {
-    book: {
+    movie: {
       id: 1,
       title: 'The Red Queen',
       image:
         'https://cdn1.thr.com/sites/default/files/imagecache/NFE_portrait/2014/06/red_queen_book_cover_a_p.jpg',
-      author: {
+      director: {
         name: 'Victoria Aveyard',
       },
     },
   };
   render() {
-    const {id, title, image, author} = this.props.book;
+    const {id, title, image, director} = this.props.movie;
     return (
-      <BookWrapper as={Link} to={`/book/${id}`}>
-        <BookImage src={image} alt={title} />
-        <BookTitle>{title}</BookTitle>
-        <BookAuthor>{author.name}</BookAuthor>
-      </BookWrapper>
+      <MovieWrapper as={Link} to={`/movie/${id}`}>
+        <MovieImage src={image} alt={title} />
+        <MovieTitle>{title}</MovieTitle>
+        <MovieDirector>{director.name}</MovieDirector>
+      </MovieWrapper>
     );
   }
 }
 
-export default Book;
+export default Movie;
