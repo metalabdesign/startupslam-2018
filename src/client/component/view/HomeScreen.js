@@ -1,9 +1,28 @@
 import * as React from 'react';
+import gql from 'graphql-tag';
+
+import {Query} from 'react-apollo';
 
 import Container from '../base/Container';
 import Text from '../base/Text';
 import Movie from '../base/Movie';
 import Carousel from '../base/Carousel';
+import LoadingSpinner from '../base/LoadingSpinner';
+
+const GET_MOVIES = gql`
+  {
+    movies {
+      id
+      title
+      image
+      actors
+      genres
+      reviews
+      rating
+      reviewCount
+    }
+  }
+`;
 
 class HomeScreen extends React.PureComponent {
   render() {
@@ -13,6 +32,20 @@ class HomeScreen extends React.PureComponent {
         <Container>
           <Text.H2>Popular</Text.H2>
           <Carousel>
+            <Query query={GET_MOVIES}>
+              {({loading, error, data}) => {
+                if (loading) return 'Loading...';
+                if (error) return `Error! ${error.message}`;
+
+                return (
+                  <div>
+                    {data.movies.map((movie) => {
+                      <Movie movie={movie} />;
+                    })}
+                  </div>
+                );
+              }}
+            </Query>
             <Movie />
             <Movie />
             <Movie />

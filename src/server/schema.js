@@ -14,41 +14,41 @@ const typeDefs = `
   Movie type.
   """
   type Movie {
-    id: ID!
-    title: String!
-    image: String!
-    actors: [Actor]!
-    genre: [String]!
-    reviews: [Review]!
+    id: ID
+    title: String
+    image: String
+    actors: [Actor]
+    genres: [String]
+    reviews: [Review]
     rating: Float
-    reviewCount: Int!
+    reviewCount: Int
   }
 
   """
   User type.
   """
   type User {
-    id: ID!
-    name: String!
-    photo: String!
+    id: ID
+    name: String
+    photo: String
   }
 
   """
   Actor type.
   """
   type Actor {
-    id: ID!
-    name: String!
+		id: ID
+    name: String
   }
 
   """
   Review type.
   """
   type Review {
-    id: ID!
-    user: User!
-    rating: Int!
-    content: String!
+    id: ID
+    user: User
+    rating: Int
+    content: String
   }
 
   # ================================================
@@ -57,7 +57,8 @@ const typeDefs = `
 
   type Query {
     appVersion: String
-    movies: [Movie]
+		movies: [Movie]
+    moviesByCategory(category: String!): [Movie]
   }
 `;
 
@@ -67,7 +68,9 @@ const resolvers = {
     appVersion: () => {
       return 'metaflix-0.1.0';
     },
-    movies: () => movies,
+    movies: (_, args) => {
+      return movies.find((movie) => movie.category == args.category);
+    },
   },
 };
 

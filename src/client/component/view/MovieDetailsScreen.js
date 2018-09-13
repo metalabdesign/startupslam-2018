@@ -20,7 +20,9 @@ class MovieDetailsScreen extends React.PureComponent {
       similarMovies: [],
     },
   };
+
   render() {
+    console.log(movie)
     const {movie} = this.props;
     return (
       // ...
