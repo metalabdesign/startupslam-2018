@@ -22,6 +22,7 @@ const typeDefs = `
     reviews: [Review]
     rating: Float
     reviewCount: Int
+		category: String
   }
 
   """
@@ -57,8 +58,8 @@ const typeDefs = `
 
   type Query {
     appVersion: String
-		movies: [Movie]
-    moviesByCategory(category: String!): [Movie]
+		movie(id: ID!): Movie
+		movies(category: String!): [Movie]
   }
 `;
 
@@ -68,8 +69,11 @@ const resolvers = {
     appVersion: () => {
       return 'metaflix-0.1.0';
     },
+    movie: (_, args) => {
+      return movies.find((movie) => movie.id == args.id);
+    },
     movies: (_, args) => {
-      return movies.find((movie) => movie.category == args.category);
+      return movies.filter((movie) => movie.category == args.category);
     },
   },
 };
