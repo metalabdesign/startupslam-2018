@@ -1,4 +1,5 @@
 export default [
+  //Banner movie
   {
     id: 1,
     title: 'Predestination',
@@ -13,6 +14,7 @@ export default [
     category: 'banner',
   },
 
+  //Cole's Picks movies
   {
     id: 2,
     title: 'The Girl with the Dragon Tattoo',
@@ -47,6 +49,7 @@ export default [
     category: 'cole',
   },
 
+  //Recommended movies
   {
     id: 5,
     title: 'Elfen Lied',

@@ -4,6 +4,7 @@
 import {makeExecutableSchema} from 'graphql-tools';
 import movieData from '../data/movies';
 import actorData from '../data/actors';
+import reviewData from '../data/reviews';
 
 // Construct a schema, using GraphQL schema language
 const typeDefs = `
@@ -67,25 +68,41 @@ const typeDefs = `
 `;
 
 // Provide resolver functions for your schema fields
+
 const resolvers = {
   Query: {
     appVersion: () => {
       return 'metaflix-0.1.0';
     },
     movie: (_, args) => {
-      return movieData.find((movie) => movie.id == args.id);
+      const movie = movieData.find((movie) => movie.id == args.id);
+
+      // Replace actor IDs with `Actor` type objects
+
+      movie.actors = movie.actors.map((actor) => {
+        return actorData.find((a) => a.id == actor);
+      });
+
+      // Add up total rating and determine number of reviews
+
+      movie.rating = 0;
+      movie.reviewCount = 0;
+
+      reviewData.map((review) => {
+        if (review.movieID == movie.id) {
+          movie.rating += review.rating;
+          movie.reviewCount += 1;
+        }
+      });
+
+			// Get true score by dividing total rating by number of reviews
+
+      movie.rating = Math.round((movie.rating / movie.reviewCount) * 10) / 10;
+
+      return movie;
     },
     moviesByCategory: (_, args) => {
-      const movies = movieData
-        .filter((movie) => movie.category == args.category)
-        .map((movie) => {
-          movie.actors = movie.actors.map((actor) => {
-            return actorData.find((a) => a.id == actor);
-          });
-          return movie;
-        });
-
-      return movies;
+      return movieData.filter((movie) => movie.category == args.category);
     },
   },
 };
