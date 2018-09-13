@@ -2,7 +2,8 @@
 // See docs and examples at https://github.com/apollographql/awesome-launchpad
 
 import {makeExecutableSchema} from 'graphql-tools';
-import movies from '../data/movies';
+import movieData from '../data/movies';
+import actorData from '../data/actors';
 
 // Construct a schema, using GraphQL schema language
 const typeDefs = `
@@ -16,7 +17,9 @@ const typeDefs = `
   type Movie {
     id: ID
     title: String
-    image: String
+    cover: String
+		wide: String
+		detail: String
     actors: [Actor]
     genres: [String]
     reviews: [Review]
@@ -59,7 +62,7 @@ const typeDefs = `
   type Query {
     appVersion: String
 		movie(id: ID!): Movie
-		movies(category: String!): [Movie]
+		moviesByCategory(category: String!): [Movie]
   }
 `;
 
@@ -70,10 +73,19 @@ const resolvers = {
       return 'metaflix-0.1.0';
     },
     movie: (_, args) => {
-      return movies.find((movie) => movie.id == args.id);
+      return movieData.find((movie) => movie.id == args.id);
     },
-    movies: (_, args) => {
-      return movies.filter((movie) => movie.category == args.category);
+    moviesByCategory: (_, args) => {
+      const movies = movieData
+        .filter((movie) => movie.category == args.category)
+        .map((movie) => {
+          movie.actors = movie.actors.map((actor) => {
+            return actorData.find((a) => a.id == actor);
+          });
+          return movie;
+        });
+
+      return movies;
     },
   },
 };

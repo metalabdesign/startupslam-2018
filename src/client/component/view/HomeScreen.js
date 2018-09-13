@@ -9,7 +9,7 @@ import Movie from '../base/Movie';
 import Carousel from '../base/Carousel';
 import LoadingSpinner from '../base/LoadingSpinner';
 
-const GET_MOVIES = gql`
+const MOVIES_BY_CATEGORY = gql`
   {
     movies {
       id
@@ -32,8 +32,9 @@ class HomeScreen extends React.PureComponent {
         <Container>
           <Text.H2>Popular</Text.H2>
           <Carousel>
-            <Query query={GET_MOVIES}>
+            <Query query={MOVIES_BY_CATEGORY}>
               {({loading, error, data}) => {
+                console.log(data)
                 if (loading) return 'Loading...';
                 if (error) return `Error! ${error.message}`;
 
