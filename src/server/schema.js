@@ -18,9 +18,9 @@ const typeDefs = `
   type Movie {
     id: ID
     title: String
-    cover: String
-		wide: String
-		detail: String
+    coverImage: String
+		wideImage: String
+		detailImage: String
     actors: [Actor]
     genres: [String]
 		reviews: [Review]
