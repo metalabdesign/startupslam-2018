@@ -23,7 +23,7 @@ const typeDefs = `
 		detail: String
     actors: [Actor]
     genres: [String]
-    reviews: [Review]
+		reviews: [Review]
     rating: Float
     reviewCount: Int
 		category: String
@@ -83,19 +83,20 @@ const resolvers = {
         return actorData.find((a) => a.id == actor);
       });
 
-      // Add up total rating and determine number of reviews
+      // Attribute `Review` type reviews to movie and calculate rating and
+			// number of reviews.
 
       movie.rating = 0;
       movie.reviewCount = 0;
+      movie.reviews = [];
 
       reviewData.map((review) => {
         if (review.movieID == movie.id) {
           movie.rating += review.rating;
           movie.reviewCount += 1;
+          movie.reviews.push(review);
         }
       });
-
-			// Get true score by dividing total rating by number of reviews
 
       movie.rating = Math.round((movie.rating / movie.reviewCount) * 10) / 10;
 
