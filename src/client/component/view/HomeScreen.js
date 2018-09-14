@@ -5,21 +5,19 @@ import {Query} from 'react-apollo';
 
 import Container from '../base/Container';
 import Text from '../base/Text';
+import BannerMovie from '../base/BannerMovie';
 import Movie from '../base/Movie';
 import Carousel from '../base/Carousel';
 import LoadingSpinner from '../base/LoadingSpinner';
 
-const MOVIES_BY_CATEGORY = gql`
+const ALL_MOVIES = gql`
   {
     movies {
       id
       title
-      image
-      actors
-      genres
-      reviews
-      rating
-      reviewCount
+      coverImage
+      wideImage
+      category
     }
   }
 `;
@@ -27,35 +25,50 @@ const MOVIES_BY_CATEGORY = gql`
 class HomeScreen extends React.PureComponent {
   render() {
     return (
-      <div>
-        <Container>Carousel!</Container>
-        <Container>
-          <Text.H2>Popular</Text.H2>
-          <Carousel>
-            <Query query={MOVIES_BY_CATEGORY}>
-              {({loading, error, data}) => {
-                console.log(data)
-                if (loading) return 'Loading...';
-                if (error) return `Error! ${error.message}`;
+      <Query query={ALL_MOVIES}>
+        {({loading, error, data}) => {
+          if (loading) return 'Loading...';
+          if (error) return `Error! ${error.message}`;
 
-                return (
-                  <div>
-                    {data.movies.map((movie) => {
-                      <Movie movie={movie} />;
-                    })}
-                  </div>
-                );
-              }}
-            </Query>
-            <Movie />
-            <Movie />
-            <Movie />
-          </Carousel>
-        </Container>
-        <Container>
-          <Text.H2>Recommended</Text.H2>
-        </Container>
-      </div>
+          const banner = data.movies.filter((movie) => {
+            return movie.category == 'banner';
+          });
+
+          const colesPicks = data.movies.filter((movie) => {
+            return movie.category == 'cole';
+          });
+
+          const recommended = data.movies.filter((movie) => {
+            return movie.category == 'recommended';
+          });
+
+          return (
+            <div>
+              <Container>
+                {banner.map((movie) => {
+                  return <BannerMovie key={movie.id} movie={movie} />;
+                })}
+              </Container>
+              <Container>
+                <Text.H1>Cole's Picks</Text.H1>
+                <Carousel>
+                  {colesPicks.map((movie) => {
+                    return <Movie key={movie.id} movie={movie} />;
+                  })}
+                </Carousel>
+              </Container>
+              <Container>
+                <Text.H1>Recommended</Text.H1>
+                <Carousel>
+                  {recommended.map((movie) => {
+                    return <Movie key={movie.id} movie={movie} />;
+                  })}
+                </Carousel>
+              </Container>
+            </div>
+          );
+        }}
+      </Query>
     );
   }
 }

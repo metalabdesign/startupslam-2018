@@ -2,9 +2,11 @@
 // See docs and examples at https://github.com/apollographql/awesome-launchpad
 
 import {makeExecutableSchema} from 'graphql-tools';
+
 import movieData from '../data/movies';
 import actorData from '../data/actors';
 import reviewData from '../data/reviews';
+import userData from '../data/users';
 
 // Construct a schema, using GraphQL schema language
 const typeDefs = `
@@ -27,6 +29,7 @@ const typeDefs = `
     rating: Float
     reviewCount: Int
 		category: String
+		synopsis: String
   }
 
   """
@@ -63,9 +66,24 @@ const typeDefs = `
   type Query {
     appVersion: String
 		movie(id: ID!): Movie
+		movies: [Movie]
 		moviesByCategory(category: String!): [Movie]
   }
+
+	type Mutation {
+		likeMovie(userID: ID!, movieID: ID!, like: Boolean!): [Boolean]
+	}
 `;
+
+// Reuseable mock DB calls.
+
+const getMovie = (id) => {
+  return movieData.find((movie) => movie.id == id);
+};
+
+const getUser = (id) => {
+  return userData.find((user) => user.id == id);
+};
 
 // Provide resolver functions for your schema fields
 
@@ -75,7 +93,9 @@ const resolvers = {
       return 'metaflix-0.1.0';
     },
     movie: (_, args) => {
-      const movie = movieData.find((movie) => movie.id == args.id);
+      // Get the movie
+
+      const movie = getMovie(args.id);
 
       // Replace actor IDs with `Actor` type objects
 
@@ -84,7 +104,7 @@ const resolvers = {
       });
 
       // Attribute `Review` type reviews to movie and calculate rating and
-			// number of reviews.
+      // number of reviews.
 
       movie.rating = 0;
       movie.reviewCount = 0;
@@ -98,12 +118,33 @@ const resolvers = {
         }
       });
 
+      // Replace review user IDs with User type data
+
+      movie.reviews.map((review) => {
+        review.user = userData.find((user) => user.id == review.userID);
+        return review;
+      });
+
       movie.rating = Math.round((movie.rating / movie.reviewCount) * 10) / 10;
 
       return movie;
     },
+    movies: () => {
+      return movieData;
+    },
     moviesByCategory: (_, args) => {
       return movieData.filter((movie) => movie.category == args.category);
+    },
+  },
+  Mutation: {
+    likeMovie: (_, args) => {
+      // get the user
+
+      const user = getUser(args.userID);
+
+      // do stuff
+
+      return args.like;
     },
   },
 };

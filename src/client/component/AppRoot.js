@@ -35,7 +35,9 @@ class AppRoot extends React.Component {
                 <Route
                   path="/movie/:id"
                   render={(routeProps) => {
-                    return <MovieDetailsScreen id={routeProps.match.id} />;
+                    return (
+                      <MovieDetailsScreen id={routeProps.match.params.id} />
+                    );
                   }}
                 />
                 <Route render={() => <NotFoundScreen />} />

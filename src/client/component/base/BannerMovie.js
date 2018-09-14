@@ -24,16 +24,15 @@ class Movie extends React.PureComponent {
     movie: {
       id: 1,
       title: 'The Red Queen',
-      coverImage:
+      wideImage:
         'https://cdn1.thr.com/sites/default/files/imagecache/NFE_portrait/2014/06/red_queen_book_cover_a_p.jpg',
     },
   };
   render() {
-    const {id, title, coverImage} = this.props.movie;
+    const {id, title, wideImage} = this.props.movie;
     return (
       <MovieWrapper as={Link} to={`/movie/${id}`}>
-        <MovieImage src={coverImage} alt={title} />
-        <MovieTitle>{title}</MovieTitle>
+        <MovieImage src={wideImage} alt={title} />
       </MovieWrapper>
     );
   }
