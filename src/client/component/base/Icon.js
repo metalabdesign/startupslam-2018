@@ -17,10 +17,10 @@ const icons = {
       <path d="M6 2 L26 2 26 30 16 20 6 30 Z" />
     </svg>
   ),
-  burger: (
+  menu: (
     <svg
-      width="27px"
-      height="19px"
+      width="25px"
+      height="18px"
       viewBox="0 0 27 19"
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"

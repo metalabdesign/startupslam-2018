@@ -1,6 +1,5 @@
 import * as React from 'react';
 import gql from 'graphql-tag';
-import styled from 'styled-components';
 
 import {Query} from 'react-apollo';
 
@@ -10,6 +9,7 @@ import BannerMovie from '../base/BannerMovie';
 import Movie from '../base/Movie';
 import Carousel from '../base/Carousel';
 import LoadingSpinner from '../base/LoadingSpinner';
+import Icon from '../base/Icon';
 
 const ALL_MOVIES = gql`
   {
@@ -26,28 +26,12 @@ const ALL_MOVIES = gql`
 class HomeScreen extends React.PureComponent {
   render() {
     return (
-      <div>
+      <div style={{paddingTop: '32px'}}>
         <Container>
-          <svg
-            width="30"
-            height="30"
-            viewBox="0 0 1792 1792"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M1664 1344v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45zm0-512v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45zm0-512v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45z"
-              fill="#fff"
-            />
-          </svg>
-          <span
-            style={{
-              fontFamily: 'Oswald, sans-serif',
-              fontSize: '2em',
-              paddingLeft: '0.5em',
-            }}
-          >
-            METAFLIX
-          </span>
+          <div>
+            <Icon name="menu" />
+            <Text.LOGO>METAFLIX</Text.LOGO>
+          </div>
         </Container>
         <Query query={ALL_MOVIES}>
           {({loading, error, data}) => {
@@ -74,7 +58,10 @@ class HomeScreen extends React.PureComponent {
                   })}
                 </Container>
                 <Container>
-                  <Text.H1>Cole's Picks</Text.H1>
+                  <Text.H2>
+                    Cole's Picks
+                    <Text.SMALL_RIGHT>See all</Text.SMALL_RIGHT>
+                  </Text.H2>
                   <Carousel>
                     {colesPicks.map((movie) => {
                       return <Movie key={movie.id} movie={movie} />;
@@ -82,7 +69,10 @@ class HomeScreen extends React.PureComponent {
                   </Carousel>
                 </Container>
                 <Container>
-                  <Text.H1>Recommended</Text.H1>
+                  <Text.H2>
+                    Recommended
+                    <Text.SMALL_RIGHT>See all</Text.SMALL_RIGHT>
+                  </Text.H2>
                   <Carousel>
                     {recommended.map((movie) => {
                       return <Movie key={movie.id} movie={movie} />;
