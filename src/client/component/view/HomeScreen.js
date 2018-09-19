@@ -1,5 +1,6 @@
 import * as React from 'react';
 import gql from 'graphql-tag';
+import styled from 'styled-components';
 
 import {Query} from 'react-apollo';
 
@@ -23,15 +24,29 @@ const ALL_MOVIES = gql`
   }
 `;
 
+const LogoWrapper = styled.div`
+  position: relative;
+  padding-right: 16.32px;
+`;
+
+const HeaderWrapper = styled.div`
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+`;
+
 class HomeScreen extends React.PureComponent {
   render() {
     return (
       <div style={{paddingTop: '32px'}}>
         <Container>
-          <div>
-            <Icon name="menu" />
+          <HeaderWrapper>
+            <LogoWrapper>
+              <Icon name="menu" />
+            </LogoWrapper>
             <Text.LOGO>METAFLIX</Text.LOGO>
-          </div>
+          </HeaderWrapper>
         </Container>
         <Query query={ALL_MOVIES}>
           {({loading, error, data}) => {

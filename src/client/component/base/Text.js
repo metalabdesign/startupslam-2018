@@ -22,7 +22,7 @@ export const P = styled.p`
 
 export const LOGO = styled.div`
   font-size: 36px;
-  font-family: 'UniversLT-UltraCondensed', sans-serif;
+  font-family: 'Helvetica Neue', sans-serif;
   display: inline-block;
 `;
 
