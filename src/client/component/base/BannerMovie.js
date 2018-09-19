@@ -8,7 +8,7 @@ const MovieImage = styled.img`
 `;
 
 const MovieWrapper = styled.div`
-  width: 480px;
+  width: 100%;
   display: block;
 `;
 
