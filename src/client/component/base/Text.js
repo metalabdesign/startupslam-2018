@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 export const H1 = styled.div`
   font-size: 24px;
-  font-weight: bold;
 `;
 
 export const H2 = styled.div`
@@ -42,6 +41,7 @@ export const TEST = styled.div`
 const Text = {
   H1,
   H2,
+  H3,
   LOGO,
   SMALL_RIGHT,
   TEST,

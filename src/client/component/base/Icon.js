@@ -115,6 +115,101 @@ const icons = {
       </g>
     </svg>
   ),
+  starFilled: (
+    <svg
+      width="23px"
+      height="22px"
+      viewBox="0 0 23 22"
+      version="1.1"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <g
+        id="Book-App-[Black-Ver]"
+        stroke="none"
+        strokeWidth="1"
+        fill="none"
+        fillRule="evenodd"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <g
+          id="Details-Screen"
+          transform="translate(-95.000000, -424.000000)"
+          fill="#F8E71C"
+          stroke="#F8E71C"
+          strokeWidth="2"
+        >
+          <g id="Group-2" transform="translate(16.000000, 425.000000)">
+            <polygon
+              id="Shape"
+              points="90.4947792 0.265127756 93.2761712 7.21860793 100.229651 7.21860793 94.6668673 12.0860441 96.7529113 19.7348722 90.4947792 14.8674361 84.236647 19.7348722 86.322691 12.0860441 80.7599069 7.21860793 87.7133871 7.21860793"
+            />
+          </g>
+        </g>
+      </g>
+    </svg>
+  ),
+  heart: (
+    <svg
+      width="23px"
+      height="21px"
+      viewBox="0 0 23 21"
+      version="1.1"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <g
+        id="Book-App-[Black-Ver]"
+        stroke="none"
+        strokeWidth="1"
+        fill="none"
+        fillRule="evenodd"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <g
+          id="Details-Screen"
+          transform="translate(-337.000000, -327.000000)"
+          stroke="#FFFFFF"
+        >
+          <path
+            d="M339.277723,337.95367 C337.006215,334.924992 337.763385,330.381976 341.549232,328.867637 C345.335079,327.353298 347.606587,330.381976 348.363757,331.896314 C349.120926,330.381976 352.149604,327.353298 355.935451,328.867637 C359.721298,330.381976 359.721298,334.924992 357.44979,337.95367 C355.178282,340.982348 348.363757,347.039703 348.363757,347.039703 C348.363757,347.039703 341.549232,340.982348 339.277723,337.95367 Z"
+            id="Shape"
+          />
+        </g>
+      </g>
+    </svg>
+  ),
+  play: (
+    <svg
+      width="10px"
+      height="17px"
+      viewBox="0 0 10 17"
+      version="1.1"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <g
+        id="Book-App-[Black-Ver]"
+        stroke="none"
+        strokeWidth="1"
+        fill="none"
+        fillRule="evenodd"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <g
+          id="Details-Screen"
+          transform="translate(-164.000000, -271.000000)"
+          stroke="#FFFFFF"
+          strokeWidth="2"
+        >
+          <polygon
+            id="Shape"
+            points="165.241862 272.525853 165.241862 286.148461 172.053166 279.337157"
+          />
+        </g>
+      </g>
+    </svg>
+  ),
 };
 
 class Icon extends React.PureComponent {
